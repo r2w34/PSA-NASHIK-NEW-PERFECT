@@ -20,7 +20,7 @@ interface HeaderProps {
 }
 
 export function Header({ onMenuClick }: HeaderProps) {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
   const [searchQuery, setSearchQuery] = useState('');
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -53,41 +53,41 @@ export function Header({ onMenuClick }: HeaderProps) {
   ];
 
   return (
-    <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 shadow-sm">
+    <header className="bg-gray-900/80 backdrop-blur-xl border-b border-white/10 px-6 py-4 shadow-2xl">
       <div className="flex items-center justify-between">
         {/* Left side - Mobile menu and search */}
-        <div className="flex items-center space-x-4 flex-1">
+        <div className="flex items-center space-x-6 flex-1">
           <Button
             variant="ghost"
             size="sm"
             onClick={onMenuClick}
-            className="lg:hidden p-2 h-10 w-10"
+            className="lg:hidden p-2 h-10 w-10 hover:bg-white/10 text-purple-300 hover:text-white rounded-xl"
           >
             <Menu className="h-5 w-5" />
           </Button>
 
           {/* Global search */}
-          <div className="relative max-w-md w-full">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <div className="relative max-w-lg w-full">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-purple-400" />
             <Input
               type="text"
               placeholder="Search students, payments, batches..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 pr-4 h-10 bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 focus:bg-white dark:focus:bg-gray-600"
+              className="pl-12 pr-4 h-12 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl text-white placeholder-purple-300/60 focus:bg-white/10 focus:border-purple-500/50 transition-all duration-200"
             />
           </div>
         </div>
 
         {/* Right side - Quick actions and user menu */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-3">
           {/* Quick action buttons */}
-          <div className="hidden md:flex items-center space-x-2">
+          <div className="hidden md:flex items-center space-x-3">
             <Button
               variant="outline"
               size="sm"
               onClick={handleAddStudent}
-              className="h-10 px-3 bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800"
+              className="h-11 px-4 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 hover:from-blue-500/20 hover:to-cyan-500/20 text-blue-300 border border-blue-500/30 hover:border-blue-400/50 rounded-xl backdrop-blur-sm transition-all duration-200"
             >
               <UserPlus className="h-4 w-4 mr-2" />
               Add Student
@@ -96,7 +96,7 @@ export function Header({ onMenuClick }: HeaderProps) {
               variant="outline"
               size="sm"
               onClick={handleRecordPayment}
-              className="h-10 px-3 bg-green-50 hover:bg-green-100 text-green-700 border-green-200 dark:bg-green-900/20 dark:hover:bg-green-900/30 dark:text-green-300 dark:border-green-800"
+              className="h-11 px-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 hover:from-green-500/20 hover:to-emerald-500/20 text-green-300 border border-green-500/30 hover:border-green-400/50 rounded-xl backdrop-blur-sm transition-all duration-200"
             >
               <CreditCard className="h-4 w-4 mr-2" />
               Record Payment
@@ -109,40 +109,40 @@ export function Header({ onMenuClick }: HeaderProps) {
               variant="ghost"
               size="sm"
               onClick={() => setShowNotifications(!showNotifications)}
-              className="p-2 h-10 w-10 relative"
+              className="p-3 h-11 w-11 relative hover:bg-white/10 text-purple-300 hover:text-white rounded-xl transition-all duration-200"
             >
               <Bell className="h-5 w-5" />
               {notifications.some(n => n.unread) && (
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                <span className="absolute top-2 right-2 w-2 h-2 bg-gradient-to-r from-pink-500 to-red-500 rounded-full shadow-lg"></span>
               )}
             </Button>
 
             {showNotifications && (
-              <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
-                <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-                  <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Notifications</h3>
+              <div className="absolute right-0 mt-3 w-80 bg-gray-900/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/10 z-50">
+                <div className="p-4 border-b border-white/10">
+                  <h3 className="text-sm font-semibold text-white">Notifications</h3>
                 </div>
-                <div className="max-h-64 overflow-y-auto">
+                <div className="max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-purple-500/20 scrollbar-track-transparent">
                   {notifications.map((notification) => (
                     <div
                       key={notification.id}
-                      className={`p-4 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 ${
-                        notification.unread ? 'bg-blue-50 dark:bg-blue-900/10' : ''
+                      className={`p-4 border-b border-white/5 hover:bg-white/5 transition-all duration-200 ${
+                        notification.unread ? 'bg-purple-500/10' : ''
                       }`}
                     >
                       <div className="flex items-start space-x-3">
-                        <div className={`w-2 h-2 rounded-full mt-2 ${notification.unread ? 'bg-blue-500' : 'bg-gray-300'}`}></div>
+                        <div className={`w-2 h-2 rounded-full mt-2 ${notification.unread ? 'bg-purple-500' : 'bg-gray-500'}`}></div>
                         <div className="flex-1">
-                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{notification.title}</p>
-                          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{notification.message}</p>
-                          <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">{notification.time}</p>
+                          <p className="text-sm font-medium text-white">{notification.title}</p>
+                          <p className="text-xs text-purple-300/80 mt-1">{notification.message}</p>
+                          <p className="text-xs text-gray-500 mt-1">{notification.time}</p>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="p-3 border-t border-gray-200 dark:border-gray-700">
-                  <Button variant="ghost" size="sm" className="w-full text-sm">
+                <div className="p-3 border-t border-white/10">
+                  <Button variant="ghost" size="sm" className="w-full text-sm text-purple-300 hover:text-white hover:bg-white/10 rounded-xl">
                     View all notifications
                   </Button>
                 </div>
@@ -155,7 +155,7 @@ export function Header({ onMenuClick }: HeaderProps) {
             variant="ghost"
             size="sm"
             onClick={toggleDarkMode}
-            className="p-2 h-10 w-10"
+            className="p-3 h-11 w-11 hover:bg-white/10 text-purple-300 hover:text-white rounded-xl transition-all duration-200"
           >
             {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </Button>
@@ -166,52 +166,55 @@ export function Header({ onMenuClick }: HeaderProps) {
               variant="ghost"
               size="sm"
               onClick={() => setShowUserMenu(!showUserMenu)}
-              className="p-2 h-10 flex items-center space-x-2"
+              className="p-2 h-11 flex items-center space-x-3 hover:bg-white/10 rounded-xl transition-all duration-200"
             >
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
-                <span className="text-sm font-semibold text-white">
-                  {user?.name?.charAt(0) || 'A'}
-                </span>
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full blur-lg opacity-50"></div>
+                <div className="relative w-9 h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-xl">
+                  <span className="text-sm font-bold text-white">
+                    {user?.name?.charAt(0) || 'A'}
+                  </span>
+                </div>
               </div>
-              <span className="hidden md:block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <span className="hidden md:block text-sm font-medium text-white">
                 {user?.name || 'Admin'}
               </span>
             </Button>
 
             {showUserMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
-                <div className="p-3 border-b border-gray-200 dark:border-gray-700">
-                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{user?.name || 'Admin User'}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{user?.email || 'admin@psa-nashik.com'}</p>
+              <div className="absolute right-0 mt-3 w-56 bg-gray-900/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/10 z-50">
+                <div className="p-4 border-b border-white/10">
+                  <p className="text-sm font-semibold text-white">{user?.name || 'Admin User'}</p>
+                  <p className="text-xs text-purple-300/80">{user?.email || 'admin@psa-nashik.com'}</p>
                 </div>
                 <div className="py-2">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="w-full justify-start px-3 py-2 text-sm"
+                    className="w-full justify-start px-4 py-3 text-sm text-purple-300 hover:text-white hover:bg-white/10 rounded-xl mx-2 transition-all duration-200"
                     onClick={() => setShowUserMenu(false)}
                   >
-                    <User className="h-4 w-4 mr-2" />
+                    <User className="h-4 w-4 mr-3" />
                     Profile
                   </Button>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="w-full justify-start px-3 py-2 text-sm"
+                    className="w-full justify-start px-4 py-3 text-sm text-purple-300 hover:text-white hover:bg-white/10 rounded-xl mx-2 transition-all duration-200"
                     onClick={() => setShowUserMenu(false)}
                   >
-                    <Settings className="h-4 w-4 mr-2" />
+                    <Settings className="h-4 w-4 mr-3" />
                     Settings
                   </Button>
                 </div>
-                <div className="py-2 border-t border-gray-200 dark:border-gray-700">
+                <div className="py-2 border-t border-white/10">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="w-full justify-start px-3 py-2 text-sm text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-900/20"
+                    className="w-full justify-start px-4 py-3 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-xl mx-2 transition-all duration-200"
                     onClick={handleLogout}
                   >
-                    <LogOut className="h-4 w-4 mr-2" />
+                    <LogOut className="h-4 w-4 mr-3" />
                     Sign Out
                   </Button>
                 </div>
