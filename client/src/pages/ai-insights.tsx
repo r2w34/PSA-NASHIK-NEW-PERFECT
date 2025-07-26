@@ -240,55 +240,57 @@ export default function AIInsights() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-6 min-h-screen bg-transparent">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow-lg">
+            <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
             </svg>
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+            <h1 className="text-3xl font-bold text-white flex items-center gap-3">
               AI Insights
-              <span className="px-2 py-1 bg-purple-500/20 text-purple-400 border border-purple-500/30 rounded-full text-xs font-medium">
-                AI Powered
+              <span className="px-3 py-1 bg-purple-500/20 text-purple-400 border border-purple-500/30 rounded-full text-sm font-medium backdrop-blur-sm">
+                🤖 AI Powered
               </span>
             </h1>
-            <p className="text-gray-400">Intelligent analytics and predictive insights for your academy</p>
+            <p className="text-gray-300 mt-1">Intelligent analytics and predictive insights for your academy</p>
           </div>
         </div>
       </div>
 
       {/* AI Query Interface */}
-      <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-          </svg>
-          <h3 className="text-lg font-semibold text-white">Ask AI Assistant</h3>
+      <div className="bg-gray-800/60 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 shadow-xl">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="p-2 bg-purple-500/20 rounded-lg">
+            <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-semibold text-white">Ask AI Assistant</h3>
         </div>
         
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
             <input
               type="text"
               placeholder="Ask me anything about your academy..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSendQuery()}
-              className="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="flex-1 px-4 py-3 bg-gray-700/50 border border-gray-600/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 backdrop-blur-sm"
             />
             <button
               onClick={handleSendQuery}
               disabled={!query.trim() || isQueryLoading}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg hover:shadow-purple-500/25"
             >
               {isQueryLoading ? (
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
               )}
@@ -337,13 +339,13 @@ export default function AIInsights() {
 
           {/* Suggested Queries */}
           <div>
-            <p className="text-sm text-gray-400 mb-2">Suggested queries:</p>
+            <p className="text-sm text-gray-300 mb-3 font-medium">💡 Suggested queries:</p>
             <div className="flex flex-wrap gap-2">
               {suggestedQueries.map((suggestion, index) => (
                 <button
                   key={index}
                   onClick={() => handleSuggestedQuery(suggestion)}
-                  className="text-xs px-3 py-1 bg-gray-700 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-600 hover:text-white transition-all duration-200"
+                  className="text-sm px-4 py-2 bg-gray-700/50 border border-gray-600/50 rounded-lg text-gray-300 hover:bg-purple-500/20 hover:border-purple-500/50 hover:text-white transition-all duration-200 backdrop-blur-sm"
                 >
                   {suggestion}
                 </button>
@@ -354,19 +356,19 @@ export default function AIInsights() {
       </div>
 
       {/* Predictive Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {predictiveMetrics.map((metric, index) => (
-          <div key={index} className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6">
+          <div key={index} className="bg-gray-800/60 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 shadow-xl hover:shadow-purple-500/10 transition-all duration-300">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-400">{metric.title}</p>
-                <p className="text-2xl font-bold text-white">{metric.value}</p>
-                <p className="text-xs text-gray-500">{metric.description}</p>
+              <div className="flex-1">
+                <p className="text-sm font-medium text-gray-300 mb-1">{metric.title}</p>
+                <p className="text-3xl font-bold text-white mb-1">{metric.value}</p>
+                <p className="text-xs text-gray-400">{metric.description}</p>
               </div>
-              <div className={`p-2 rounded-full ${
+              <div className={`p-3 rounded-full ${
                 metric.trend === 'up' ? 'bg-green-500/20' : 'bg-red-500/20'
               }`}>
-                <svg className={`w-5 h-5 ${
+                <svg className={`w-6 h-6 ${
                   metric.trend === 'up' ? 'text-green-400' : 'text-red-400 rotate-180'
                 }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -378,11 +380,13 @@ export default function AIInsights() {
       </div>
 
       {/* Student Retention Forecast */}
-      <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6">
-        <div className="flex items-center gap-2 mb-6">
-          <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+      <div className="bg-gray-800/60 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 shadow-xl">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="p-2 bg-blue-500/20 rounded-lg">
+            <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
           <h3 className="text-xl font-semibold text-white">Student Retention Forecast</h3>
         </div>
 
